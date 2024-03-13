@@ -20,8 +20,7 @@ Route::name('auth.')
             ->middleware('web');
 
         Route::post('/sign-out', [AuthController::class, 'signOut'])
-            ->name('signOut')
-            ->middleware('web');
+            ->name('signOut');
 
         Route::post('/token', [AuthController::class, 'getToken'])
             ->name('getToken');
@@ -37,18 +36,18 @@ Route::name('auth.')
         Route::post('/sign-up', [AuthController::class, 'signUp'])
             ->name('signUp');
 
-        Route::post('/request-validation', [AuthController::class, 'requestValidation'])
-            ->name('requestValidation')
+        Route::get('/email-verification', [AuthController::class, 'verificationEmail'])
+            ->name('verificationEmail')
             ->middleware('auth:sanctum');
 
-        Route::post('/validate', [AuthController::class, 'validate'])
-            ->name('validate')
+        Route::post('/email-verification', [AuthController::class, 'verifyEmail'])
+            ->name('verifyEmail')
             ->middleware('signed');
 
-        Route::post('/request-password-reset', [AuthController::class, 'requestPasswordReset'])
-            ->name('requestPasswordReset');
+        Route::get('/password-reset', [AuthController::class, 'forgotPassword'])
+            ->name('forgotPassword');
 
-        Route::post('/reset-password', [AuthController::class, 'resetPassword'])
+        Route::post('/password-reset', [AuthController::class, 'resetPassword'])
             ->name('resetPassword')
             ->middleware('signed');
     });
