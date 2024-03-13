@@ -8,9 +8,21 @@ Route::get('/user', function (Request $request) {
     return $request->user();
 })->middleware('auth:sanctum');
 
+Route::get('csrf', function (Request $request) {
+    return response()->noContent();
+})->middleware('web');
+
 Route::name('auth.')
     ->prefix('auth')
     ->group(function () {
+        Route::post('/sign-in', [AuthController::class, 'signIn'])
+            ->name('signIn')
+            ->middleware('web');
+
+        Route::post('/sign-out', [AuthController::class, 'signOut'])
+            ->name('signOut')
+            ->middleware('web');
+
         Route::post('/token', [AuthController::class, 'getToken'])
             ->name('getToken');
 

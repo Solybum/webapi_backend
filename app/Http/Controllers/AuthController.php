@@ -17,6 +17,8 @@ class AuthController extends Controller
     {
         $validated = $request->validated();
         if (Auth::attempt($validated)) {
+            $request->session()->regenerate();
+
             return response()->noContent();
         }
         return response()->noContent(Response::HTTP_BAD_REQUEST);
