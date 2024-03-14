@@ -106,7 +106,7 @@ class AuthController extends Controller
         return response(null, Response::HTTP_BAD_REQUEST);
     }
 
-    public function verificationEmail(Request $request)
+    public function emailVerification(Request $request)
     {
         $user = $request->user();
 

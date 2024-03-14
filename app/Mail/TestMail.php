@@ -13,11 +13,16 @@ class TestMail extends Mailable
 {
     use Queueable, SerializesModels;
 
+    public $appName;
+    public $frontUrl;
+
     /**
      * Create a new message instance.
      */
     public function __construct()
     {
+        $this->appName = config('mail.from.name');
+        $this->frontUrl = config('site.frontend_url');
     }
 
     /**
@@ -36,7 +41,8 @@ class TestMail extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'emails.test',
+            html: 'emails.test.html',
+            text: 'emails.test.text',
         );
     }
 

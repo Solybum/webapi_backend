@@ -41,13 +41,13 @@ class ForgotPasswordMail extends Mailable
         $parsed_url = \parse_url($temporarySignedUrl);
         $query = $parsed_url['query'];
 
-        $frontend_url = config('app.frontend_url') . config('app.frontend_path_password_reset') . "?" . $query;
+        $frontend_url = config('site.frontend_url') . config('site.frontend_path_password_reset') . "?" . $query;
 
         $this->appName = config('mail.from.name');
         $this->actionUrl = $frontend_url;
-        $this->frontUrl = config('app.frontend_url');
+        $this->frontUrl = config('site.frontend_url');
         $this->name = $user->name;
-        $this->supportUrl = config('app.frontend_url') . config('app.frontend_path_contact_us');
+        $this->supportUrl = config('site.frontend_url') . config('site.frontend_path_contact_us');
         $this->time = TimeStringHelper::convertSecondsToTimeString($seconds);
     }
 
@@ -67,7 +67,8 @@ class ForgotPasswordMail extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'emails.auth.password_reset',
+            html: 'emails.auth.forgot_password.html',
+            text: 'emails.auth.forgot_password.text',
         );
     }
 

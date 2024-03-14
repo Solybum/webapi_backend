@@ -36,15 +36,15 @@ Route::name('auth.')
         Route::post('/sign-up', [AuthController::class, 'signUp'])
             ->name('signUp');
 
-        Route::get('/email-verification', [AuthController::class, 'verificationEmail'])
-            ->name('verificationEmail')
+        Route::post('/email-verification', [AuthController::class, 'emailVerification'])
+            ->name('emailVerification')
             ->middleware('auth:sanctum');
 
-        Route::post('/email-verification', [AuthController::class, 'verifyEmail'])
+        Route::post('/verify-email', [AuthController::class, 'verifyEmail'])
             ->name('verifyEmail')
             ->middleware('signed');
 
-        Route::get('/password-reset', [AuthController::class, 'forgotPassword'])
+        Route::post('/forgot-password', [AuthController::class, 'forgotPassword'])
             ->name('forgotPassword');
 
         Route::post('/password-reset', [AuthController::class, 'resetPassword'])

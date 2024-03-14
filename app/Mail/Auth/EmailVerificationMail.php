@@ -40,13 +40,13 @@ class EmailVerificationMail extends Mailable
         $parsed_url = \parse_url($temporarySignedUrl);
         $query = $parsed_url['query'];
 
-        $frontend_url = config('app.frontend_url') . config('app.frontend_path_email_verification') . "?" . $query;
+        $frontend_url = config('site.frontend_url') . config('site.frontend_path_email_verification') . "?" . $query;
 
         $this->appName = config('mail.from.name');
         $this->actionUrl = $frontend_url;
-        $this->frontUrl = config('app.frontend_url');
+        $this->frontUrl = config('site.frontend_url');
         $this->name = $user->name;
-        $this->supportUrl = config('app.frontend_url') . config('app.frontend_path_contact_us');
+        $this->supportUrl = config('site.frontend_url') . config('site.frontend_path_contact_us');
         $this->time = TimeStringHelper::convertSecondsToTimeString($seconds);
     }
 
@@ -66,7 +66,8 @@ class EmailVerificationMail extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'emails.auth.email_verification',
+            html: 'emails.auth.email_verification.html',
+            text: 'emails.auth.email_verification.text',
         );
     }
 
